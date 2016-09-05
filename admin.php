@@ -10,7 +10,7 @@ if (isset($_SESSION['admin'])) {
                 $isexist = "select * from `url` where parameter = '$_POST[parameter]'";
                 $exist = mysql_query($isexist);
                 $row = mysql_fetch_array($exist);
-                if(!empty($row)){
+                if (!empty($row)) {
                     echo "<script language=\"javascript\">alert('该参数已经存在了');location='admin.php';</script>";
                     exit;
                 }
@@ -24,16 +24,17 @@ if (isset($_SESSION['admin'])) {
             echo "<script language=\"javascript\">alert('必须添加参数');</script>";
         }
     }
-//    if ($_POST['delete']) {
-//        $del = $_POST['del'];
-//        if (isset($_POST['del'])) {
-//            foreach ($del as $value) {
-//                $sql = "delete from `url` WHERE id=$value";
-//                mysql_query($sql);
-//                echo "<script language=\"javascript\">alert('删除成功');location='admin.php';</script>";
-//            }
-//        }
-//    }
+    if ($_POST['delete']) {
+        $del = $_POST['del'];
+        foreach ($del as $value) {
+            if (!empty($value['id'])) {
+                $id = $value['id'];
+                $sql = "delete from `url` WHERE id=$id";
+                mysql_query($sql);
+                echo "<script language=\"javascript\">alert('删除成功');location='admin.php';</script>";
+            }
+        }
+    }
 
     if ($_POST['edit']) {
         $del = $_POST['del'];
@@ -110,50 +111,54 @@ if (isset($_SESSION['admin'])) {
                                             <?php
                                         }
                                         ?>
-                                        <input type="submit" name="edit" value="修改"/>
-    <!--                                        <input type="submit" name="delete" value="删除"/>-->
-                                        <p align="center" style="line-height:30px;"><span>一共<?php echo $num ?>条数据</span><span style=" padding-left:14px;">总<?php echo $pcunt ?></span>页　当前为第<span><?php echo $page ?></span>页　<a href="<?php echo $no ?>">首页</a>
-                                            <?php
-                                            if ($page < 5) {
-                                                if ($page + 5 < $pcunt) {
-                                                    for ($i = 1; $i <= 5; $i++) {
-                                                        echo "<a id='page988' href='$no&page=$i'>$i</a>";
-                                                    }
-                                                } elseif ($page + 5 > $pcunt) {
-                                                    if ($page == 1) {
-                                                        for ($i = $page; $i <= $pcunt; $i++) {
+                                        <?php if ($num != 0) {
+                                            ?>
+
+                                            <input type="submit" name="edit" value="修改"/>
+                                            <input type="submit" name="delete" value="删除"/>
+                                            <p align="center" style="line-height:30px;"><span>一共<?php echo $num ?>条数据</span><span style=" padding-left:14px;">总<?php echo $pcunt ?></span>页　当前为第<span><?php echo $page ?></span>页　<a href="<?php echo $no ?>">首页</a>
+                                                <?php
+                                                if ($page < 5) {
+                                                    if ($page + 5 < $pcunt) {
+                                                        for ($i = 1; $i <= 5; $i++) {
                                                             echo "<a id='page988' href='$no&page=$i'>$i</a>";
                                                         }
-                                                    } elseif ($page > 1) {
+                                                    } elseif ($page + 5 > $pcunt) {
+                                                        if ($page == 1) {
+                                                            for ($i = $page; $i <= $pcunt; $i++) {
+                                                                echo "<a id='page988' href='$no&page=$i'>$i</a>";
+                                                            }
+                                                        } elseif ($page > 1) {
+
+                                                            for ($i = $page - 1; $i <= $pcunt; $i++) {
+                                                                echo "<a id='page988' href='$no&page=$i'>$i</a>";
+                                                            }
+                                                        }
+                                                    }
+                                                } elseif ($page >= 5 and $page < $pcunt) {
+                                                    if ($page + 4 > $pcunt) {
 
                                                         for ($i = $page - 1; $i <= $pcunt; $i++) {
                                                             echo "<a id='page988' href='$no&page=$i'>$i</a>";
                                                         }
+                                                    } else {
+                                                        for ($i = $page - 1; $i <= $page + 4; $i++) {
+                                                            echo "<a id='page988' href='$no&page=$i'>$i</a>";
+                                                        }
                                                     }
-                                                }
-                                            } elseif ($page >= 5 and $page < $pcunt) {
-                                                if ($page + 4 > $pcunt) {
-
-                                                    for ($i = $page - 1; $i <= $pcunt; $i++) {
-                                                        echo "<a id='page988' href='$no&page=$i'>$i</a>";
-                                                    }
-                                                } else {
-                                                    for ($i = $page - 1; $i <= $page + 4; $i++) {
+                                                } elseif ($page >= $pcunt) {
+                                                    for ($i = $page - 1; $i <= $page; $i++) {
                                                         echo "<a id='page988' href='$no&page=$i'>$i</a>";
                                                     }
                                                 }
-                                            } elseif ($page >= $pcunt) {
-                                                for ($i = $page - 1; $i <= $page; $i++) {
-                                                    echo "<a id='page988' href='$no&page=$i'>$i</a>";
-                                                }
-                                            }
-                                            ?>
-                                            <span  style=" padding-left:14px;"><a href="<?php echo $no ?>&page=<?php echo $pcunt ?>">最后一页</a> </span> </p>
-                                        </div>
-                                        </form>
-                                        </body>
-                                        </html>
-                                        <?php
+                                                ?>
+                                                <span  style=" padding-left:14px;"><a href="<?php echo $no ?>&page=<?php echo $pcunt ?>">最后一页</a> </span> </p>
+                                            </div>
+                                            </form>
+                                            </body>
+                                            </html>
+                                            <?php
+                                        }
                                     } else
                                         echo "<script language='javascript'>alert('请登录！');location='login.php';</script>";
                                     ?>
