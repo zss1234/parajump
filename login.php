@@ -23,6 +23,9 @@ if ($_POST['submit']) {
         echo "<script language='javascript'>alert('用户名或密码错误！');location='login.php';</script>";
     }
 }
+if ($_POST['register']) {
+    echo "<script language='javascript'>location='register.php';</script>";
+}
 mysql_close($conn);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -31,17 +34,26 @@ mysql_close($conn);
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>参数跳转后台登录</title>
     </head>
-    <body>
+    <body align="center">
+        <h2>登录</h2>
+        
         <form method="post">
-            <input type="text" name="username" value="在这里输入用户名...." onfocus="if (this.value == '在这里输入用户名....') {
-                        this.value = '';
-                    }"  onblur="if (this.value == '') {
-                                this.value = '在这里输入用户名....';}" />
-            <input type="password" name="passcode" value="在这里输入密码...." onfocus="if (this.value == '在这里输入密码....') {
-                        this.value = '';}"  onblur="if (this.value == '') {
+            <div style="margin-top: 1.0em">
+                账号：<input type="text" name="username" value="在这里输入用户名...." onfocus="if (this.value == '在这里输入用户名....') {
+                            this.value = '';
+                        }"  onblur="if (this.value == '') {
+                                    this.value = '在这里输入用户名....';
+                                }" />
+            </div>
+            <div style="margin-top: 1.0em;margin-bottom: 2.0em;">
+                密码：<input type="password" name="passcode" value="在这里输入密码...." onfocus="if (this.value == '在这里输入密码....') {
+                            this.value = '';
+                        }"  onblur="if (this.value == '') {
                                     this.value = '在这里输入密码....';
                                 }" />
+            </div>
             <input type="submit" name="submit" value="登陆">
-        </form>
-    </body>
-</html>
+                <input type="submit" name="register" value="注册">
+                    </form>
+                    </body>
+                    </html>
