@@ -22,6 +22,7 @@ if (strpos($para, "prd") === false) {
 //    $parameter = substr($para, strpos($para, "&") + 1);
 //    $url = $web['url'] . "?" . $parameter;
     $url = preg_replace('/prd=[\w]+&/', "", $web['url'] . "?" . $para);
+    header("HTTP/1.1 301 Moved Permanently");
     header("location:$url");
     exit;
 }
