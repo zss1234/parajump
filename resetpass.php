@@ -25,7 +25,7 @@ if (isset($_SESSION['admin'])) {
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <title>管理员密码修改</title>
         </head>
-        <body align="center">
+        <body bgcolor="#E7D4D4" align="center">
             <h1>重置密码</h1>
             <form method="post" onsubmit="return on_submit()">
                 <div style="margin-top: 1.0em;">

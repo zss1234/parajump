@@ -57,7 +57,7 @@ if (isset($_SESSION['admin'])) {
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
             <title>添加跳转参数以及跳转地址</title>
         </head>
-        <body align="center">
+        <body bgcolor="#E7D4D4" align="center">
 
             <form method="post">
                 <div align="right">

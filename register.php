@@ -42,7 +42,7 @@ if (!empty($row)) {
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>参数跳转后台登录</title>
     </head>
-    <body>
+    <body bgcolor="#E7D4D4" align="center">
         <form method="post">
             <div align="center">
                 <div style="margin-top: 1.0em">账&nbsp;&nbsp;号：<input type="text" name="username" value="在这里输入用户名...." onfocus="if (this.value == '在这里输入用户名....') {

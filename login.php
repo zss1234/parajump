@@ -34,7 +34,7 @@ mysql_close($conn);
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>参数跳转后台登录</title>
     </head>
-    <body align="center">
+    <body bgcolor="#E7D4D4" align="center">
         <h2>登录</h2>
         
         <form method="post">
