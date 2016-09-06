@@ -2,5 +2,5 @@
 RewriteEngine On
 RewriteBase /
 RewriteCond %{http_host} ^parajump.com [NC]
-RewriteRule ^(.*)$ http://parajump.com/$1 [R=301,L]
+RewriteRule ^(.*)$ http://www.parajump.com/$1 [R=301,L]
 </IFMODULE>

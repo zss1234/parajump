@@ -16,6 +16,7 @@ if (strpos($para, "prd") === false) {
     $url = '';
 } else if (strpos($para, "&") === false) {
     $url = $web['url'];
+    header("HTTP/1.1 301 Moved Permanently");
     header("location:$url");
     exit;
 } else {

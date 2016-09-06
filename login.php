@@ -32,7 +32,7 @@ mysql_close($conn);
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>参数跳转后台登录</title>
+        <title>后台登录</title>
     </head>
     <body bgcolor="#E7D4D4" align="center">
         <h2>登录</h2>
