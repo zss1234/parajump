@@ -5,7 +5,7 @@ header('Content-Type: text/html; charset=utf-8');
 $username = $_POST["username"];
 $repasscode = $_POST["repasscode"];
 $repasscodes = $_POST["repasscodes"];
-$sql = "select *from admin where user='$username'";
+$sql = "select * from admin where user='$username'";
 $row = mysql_fetch_array(mysql_query($sql));
 $n = strlen($username);
 $p = strlen($repasscode);
@@ -30,9 +30,9 @@ if (!empty($row)) {
     mysql_query($sql);
     $row = mysql_affected_rows($conn);
     if ($row > 0) {
-        echo "<script type='text/javascript' >alert('注册成功请登录');window.location.href='login.php';</script>";
+        echo "<script type='text/javascript' >alert('添加用户成功');window.location.href='admin.php';</script>";
     } else {
-        echo "<script type='text/javascript' >alert('注册失败请重新注册');window.location.href='register.php';</script>";
+        echo "<script type='text/javascript' >alert('添加用户失败');window.location.href='register.php';</script>";
     }
 }
 ?>

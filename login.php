@@ -23,9 +23,6 @@ if ($_POST['submit']) {
         echo "<script language='javascript'>alert('用户名或密码错误！');location='login.php';</script>";
     }
 }
-if ($_POST['register']) {
-    echo "<script language='javascript'>location='register.php';</script>";
-}
 mysql_close($conn);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -36,7 +33,7 @@ mysql_close($conn);
     </head>
     <body bgcolor="#E7D4D4" align="center">
         <h2>登录</h2>
-        
+
         <form method="post">
             <div style="margin-top: 1.0em">
                 账号：<input type="text" name="username" value="在这里输入用户名...." onfocus="if (this.value == '在这里输入用户名....') {
@@ -53,7 +50,6 @@ mysql_close($conn);
                                 }" />
             </div>
             <input type="submit" name="submit" value="登陆">
-                <input type="submit" name="register" value="注册">
-                    </form>
-                    </body>
-                    </html>
+        </form>
+    </body>
+</html>
