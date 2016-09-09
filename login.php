@@ -15,7 +15,7 @@ if ($_POST['submit']) {
         if ($row['user']) {
             $_SESSION['admin'] = $row['user'];
             $_SESSION['adminpass'] = $row['pass'];
-            echo "<script language='javascript'>alert('登陆成功！');location='admin.php';</script>";
+            echo "<script language='javascript'>location='admin.php';</script>";
         } else {         //如果权限信息无效输出错误信息
             echo "用户权限信息不正确";
         }

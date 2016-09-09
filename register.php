@@ -1,5 +1,6 @@
 <?php
 error_reporting(0);
+session_start();
 include_once ("conn.php");
 header('Content-Type: text/html; charset=utf-8');
 $username = $_POST["username"];
@@ -22,9 +23,6 @@ if (!empty($row)) {
 } elseif ($repasscode != $repasscodes) {
     echo "<h3>两次密码不一致</h3>";
 } else {
-    $conn = mysql_connect("localhost", "root", "") or die("数据库连接失败");
-    mysql_select_db("parajump");
-    mysql_query("set names utf8");
     $pass = md5($repasscode);
     $sql = "insert into admin(user,pass)values('{$username}','{$pass}')";
     mysql_query($sql);
@@ -34,6 +32,9 @@ if (!empty($row)) {
     } else {
         echo "<script type='text/javascript' >alert('添加用户失败');window.location.href='register.php';</script>";
     }
+}
+if ($_SESSION['admin'] != "admin") {
+    echo "<script type='text/javascript' >window.location.href='admin.php';</script>";
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -46,22 +47,22 @@ if (!empty($row)) {
         <form method="post">
             <div align="center">
                 <div style="margin-top: 1.0em">账&nbsp;&nbsp;号：<input type="text" name="username" value="在这里输入用户名...." onfocus="if (this.value == '在这里输入用户名....') {
-                        this.value = '';
-                    }"  onblur="if (this.value == '') {
-                                this.value = '在这里输入用户名....';
-                            }" />
+                            this.value = '';
+                        }"  onblur="if (this.value == '') {
+                                    this.value = '在这里输入用户名....';
+                                }" />
                 </div>
                 <div style="margin-top: 1.0em">密&nbsp;&nbsp;码：<input type="password" name="repasscode" value="在这里输入密码..." onfocus="if (this.value == '在这里输入密码...') {
-                        this.value = '';
-                    }"  onblur="if (this.value == '') {
-                                this.value = '在这里输入密码...';
-                            }" />
+                            this.value = '';
+                        }"  onblur="if (this.value == '') {
+                                    this.value = '在这里输入密码...';
+                                }" />
                 </div>
                 <div style="margin-top: 1.0em">确认密码：<input type="password" name="repasscodes" value="在这里确认密码...." onfocus="if (this.value == '在这里确认密码....') {
-                        this.value = '';
-                    }"  onblur="if (this.value == '') {
-                                this.value = '在这里确认密码....';
-                            }" />
+                            this.value = '';
+                        }"  onblur="if (this.value == '') {
+                                    this.value = '在这里确认密码....';
+                                }" />
                 </div>
                 <input style="margin-top: 1.0em;" type="submit" name="register" value="注册">
             </div>

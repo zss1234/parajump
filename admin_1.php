@@ -86,25 +86,11 @@ if (isset($_SESSION['admin'])) {
                     <a href="resetpass.php">重置密码</a>|
                     <a href="logout.php">退出</a>
                 </div>
-                <div style="margin-bottom: 50px;">
-                    <h4>添加跳转参数</h4>
-
-                    <input type="text" id="user" onMouseOut="isuser(this.value)" name="parameter" value="请输入参数...." onfocus="if (this.value == '请输入参数....') {
-                                    this.value = '';
-                                }"  onblur="if (this.value == '') {
-                                            this.value = '请输入参数....';
-                                        }" />
-                    <input type="text" name="url" value="在这里输入跳转地址...." onfocus="if (this.value == '在这里输入跳转地址....') {
-                                    this.value = '';
-                                }"  onblur="if (this.value == '') {
-                                            this.value = '在这里输入跳转地址....';
-                                        }" style="width:400px;"/>
-                    <input type="submit" name="sub" value="添加"><span id="txtHint"></span>
-                </div>
+                
 
                 <hr/>
                 <div>
-                    <h4>跳转参数</h4>
+                    <h3>管理员</h3>
 
                     <input type="text" name="select" id="select" value="输入需要搜索的关键字...." onfocus="if (this.value == '输入需要搜索的关键字....') {
                                     this.value = '';
@@ -114,9 +100,9 @@ if (isset($_SESSION['admin'])) {
                         <input type="submit" name="confirmSelect" value="查询">
                             <input type="submit" name="selectall" value="显示全部">    
                                 <?php
-                                $sqll = "SELECT * FROM `url` ";
+                                $sqll = "SELECT * FROM `admin` WHERE `user` != 'admin'";
                                 if (!empty($_GET['para'])) {
-                                    $sqll .= "WHERE parameter like '%" . $_GET['para'] . "%' or url like '%" . $_GET['para'] . "%'";
+                                    $sqll .= "user like '%" . $_GET['para'] . "%'";
                                 }
                                 $no = "admin.php?";
                                 @$page = $_GET['page'];
@@ -151,9 +137,8 @@ if (isset($_SESSION['admin'])) {
                                     <p>
                                         <span>
                                             <?php echo $num; ?><input type="checkbox" name="del[<?php echo $row[id]; ?>][id]" value="<?php echo $row[id]; ?>"  number="<?php echo $row[id]; ?>" onClick="Item(this, 'mmAll')"/>
-                                            <input id="aa" readonly="value" type="text" name="del[<?php echo $row[id]; ?>][parameter]" value="<?php echo $row['parameter'] ?>">
-                                                <input type="text" name="del[<?php echo $row[id]; ?>][url]" value="<?php echo $row['url'] ?>" style="width:600px;">
-                                                    <input readonly="value" type="text" value="?prd=<?php echo $row['parameter'] ?>">
+                                            <input id="aa" readonly="value" type="text" name="del[<?php echo $row[id]; ?>][parameter]" value="<?php echo $row['user'] ?>">
+                                                <input type="password" name="del[<?php echo $row[id]; ?>][url]" value="<?php echo $row['pass'] ?>" style="width:200px;">
                                                         </span>
                                                         </p>
                                                         <?php
