@@ -45,7 +45,16 @@ if ($_SESSION['admin'] != "admin") {
     </head>
     <body bgcolor="#E7D4D4" align="center">
         <form method="post">
+            <div align="right">
+                <h3>管理员</h3>
+                <a href="/admin.php" style="text-decoration: none">首页</a>|
+                <?php if ($_SESSION['admin'] == "admin") { ?><a href="/admin_list.php" style="text-decoration: none">用户管理</a>|<a href="/register.php" style="text-decoration: none">添加用户</a>|<?php } ?>
+                    <a href="resetpass.php" style="text-decoration: none">重置密码</a>|
+                    <a href="logout.php" style="text-decoration: none">退出</a>
+            </div>
+            <hr/>
             <div align="center">
+                <h4>添加用户</h4>
                 <div style="margin-top: 1.0em">账&nbsp;&nbsp;号：<input type="text" name="username" value="在这里输入用户名...." onfocus="if (this.value == '在这里输入用户名....') {
                             this.value = '';
                         }"  onblur="if (this.value == '') {

@@ -4,8 +4,8 @@ header('Content-Type: text/html; charset=utf-8');
 include_once ("conn.php");
 
 if(isset($_SESSION['admin'])){
-    $del = $_POST['del'];
-    var_dump($del);
+    $del = $_GET;
+    var_dump($del);exit;
     foreach ($del as $value) {
         if (!empty($value['id'])) {
             $id = $value['id'];

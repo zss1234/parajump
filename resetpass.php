@@ -26,6 +26,14 @@ if (isset($_SESSION['admin'])) {
             <title>管理员密码修改</title>
         </head>
         <body bgcolor="#E7D4D4" align="center">
+            <div align="right">
+                <h3>管理员</h3>
+                <a href="/admin.php" style="text-decoration: none">首页</a>|
+                <?php if ($_SESSION['admin'] == "admin") { ?><a href="/admin_list.php" style="text-decoration: none">用户管理</a>|<a href="/register.php" style="text-decoration: none">添加用户</a>|<?php } ?>
+                    <a href="resetpass.php" style="text-decoration: none">重置密码</a>|
+                    <a href="logout.php" style="text-decoration: none">退出</a>
+            </div>
+            <hr/>
             <h1>重置密码</h1>
             <form method="post" onsubmit="return on_submit()">
                 <div style="margin-top: 1.0em;">
