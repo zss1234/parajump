@@ -1,13 +1,15 @@
 <?php
 error_reporting(0);
 session_start();
-include_once ("conn.php");
+include_once ("connect.php");
 header('Content-Type: text/html; charset=utf-8');
 $username = $_POST["username"];
 $repasscode = $_POST["repasscode"];
 $repasscodes = $_POST["repasscodes"];
 $sql = "select * from admin where user='$username'";
-$row = mysql_fetch_array(mysql_query($sql));
+$query = $mysqli->query($sql);
+$row = $query->fetch_array();
+//$row = mysql_fetch_array(mysql_query($sql));
 $n = strlen($username);
 $p = strlen($repasscode);
 if (!empty($row)) {
@@ -25,8 +27,8 @@ if (!empty($row)) {
 } else {
     $pass = md5($repasscode);
     $sql = "insert into admin(user,pass)values('{$username}','{$pass}')";
-    mysql_query($sql);
-    $row = mysql_affected_rows($conn);
+    $query = $mysqli->query($sql);
+    $row = mysqli_affected_rows($mysqli);
     if ($row > 0) {
         echo "<script type='text/javascript' >alert('添加用户成功');window.location.href='admin.php';</script>";
     } else {

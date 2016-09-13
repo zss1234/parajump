@@ -2,21 +2,21 @@
 error_reporting(0);
 session_start();
 header('Content-Type: text/html; charset=utf-8');
-include_once ("conn.php");
+include_once ("connect.php");
 if ($_SESSION['admin'] == 'admin') {
     if (isset($_SESSION['admin'])) {
         if ($_POST['sub']) {
             if (!empty($_POST['parameter'])) {
                 if (!empty($_POST['url'])) {
                     $isexist = "select * from `url` where parameter = '$_POST[parameter]'";
-                    $exist = mysql_query($isexist);
-                    $row = mysql_fetch_array($exist);
+                    $exist = $mysqli->query($isexist);
+                    $row = $exist->fetch_array();
                     if (!empty($row)) {
                         echo "<script language=\"javascript\">location='admin.php';</script>";
                         exit;
                     }
                     $sql = "INSERT INTO `url` (`id`, `parameter`, `url` ) VALUES (NULL, '$_POST[parameter]', '$_POST[url]');";
-                    mysql_query($sql);
+                    $mysqli_query($sql);
                     echo "<script language=\"javascript\">location='admin.php';</script>";
                 } else {
                     echo "<script language=\"javascript\">alert('必须添加url');</script>";
@@ -39,7 +39,7 @@ if ($_SESSION['admin'] == 'admin') {
             $arr = explode(',', $str);
             for ($index = 0; $index < count($arr); $index++) {
                 $sql = "delete from `admin` WHERE id=$arr[$index]";
-                mysql_query($sql);
+                $mysqli->query($sql);
             }
         }
         if ($_POST['confirmSelect']) {
@@ -91,16 +91,16 @@ if ($_SESSION['admin'] == 'admin') {
                                         $page = 1;
                                     $psize = 100; //每页记录数
                                     $str = "$sqll";
-                                    $query = mysql_query($str);
-                                    $num = @mysql_num_rows($query); //总记录数
+                                    $query = $mysqli->query($str);
+                                    $num = @mysqli_num_rows($query); //总记录数
                                     $pcunt = ceil($num / $psize); //总页数
                                     $nextpage = $page + 1;
                                     $qianpage = $page - 1;
                                     $start = ($page - 1) * $psize;
 
                                     $str = "$sqll ORDER BY id DESC limit $start,$psize";
-                                    $query = mysql_query($str);
-                                    while (@$arr = mysql_fetch_array($query)) {//print_r($arr);
+                                    $query = $mysqli->query($str);
+                                    while (@$arr = $query->fetch_array()) {//print_r($arr);
                                         $array[] = $arr;
                                     }
                                     if ($page > 1)
@@ -108,11 +108,11 @@ if ($_SESSION['admin'] == 'admin') {
                                     if ($page < $pcunt)
                                         $str2 = "<a href=admin.php?page=$nextpage>下一页</a>　";
                                     $sql = "$sqll ORDER BY id DESC limit $start,$psize ";
-                                    $rerult = mysql_query($sql, $conn);
+                                    $rerult = $mysqli->query($sql);
                                     $num = 0;
                                     ?>
                                     <?php
-                                    while (@$row = mysql_fetch_array($rerult)) {
+                                    while (@$row = $rerult->fetch_array()) {
                                         $num++;
                                         ?>
                                         <p>

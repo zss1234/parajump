@@ -2,7 +2,7 @@
 error_reporting(0);
 session_start();
 header('Content-Type: text/html; charset=utf-8');
-include_once ("conn.php");
+include_once ("connect.php");
 $repassword = $_POST['repassword'];
 $repasswords = $_POST['repasswords'];
 if (isset($_SESSION['admin'])) {
@@ -13,7 +13,7 @@ if (isset($_SESSION['admin'])) {
             $pass = md5($repassword);
             $user = $_SESSION['admin'];
             $sql = "UPDATE `admin` SET `pass`='$pass' where `user` = '$user';";
-            $query = mysql_query($sql);
+            $query = $mysqli->query($sql);
             echo "<script language='javascript'>alert('修改成功！请重新登录');location='login.php';</script>";
             unset($_SESSION['admin']);
         }
